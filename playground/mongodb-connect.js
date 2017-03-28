@@ -63,11 +63,25 @@ MongoClient.connect('mongodb://localhost:27017/TodoApp', (error, db) => {
     //     console.log('Unable to delete duplicate todos.', error);
     // });
 
-    db.collection('Todos').findOneAndDelete({completed: true}).then((result) => {
+    // db.collection('Todos').findOneAndDelete({completed: true}).then((result) => {
+    //     console.log(result);
+    //     db.close();
+    // }, (error) => {
+    //     console.log('Unable to delete duplicate todos.', error);
+    // });
+
+    //Update
+    db.collection('Todos').findOneAndUpdate(
+        {_id: new ObjectID('58d9ea3f9db7bef382412b6b')},
+        {
+            $set: {
+                completed: false
+            }
+        },
+        {returnOriginal: false}
+    ).then((result) => {
         console.log(result);
         db.close();
-    }, (error) => {
-        console.log('Unable to delete duplicate todos.', error);
     });
 
     // db.close();
