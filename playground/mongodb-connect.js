@@ -8,6 +8,7 @@ MongoClient.connect('mongodb://localhost:27017/TodoApp', (error, db) => {
 
     console.log('Connected to MongoDB server.');
 
+    // Insert
     // db.collection('Todos').insertOne({
     //     text: 'Something to do.',
     //     completed: false
@@ -39,11 +40,34 @@ MongoClient.connect('mongodb://localhost:27017/TodoApp', (error, db) => {
     //     console.log('Unable to fetch todos.', error);
     // });
 
-    db.collection('Todos').find().count().then((count) => {
-        console.log(`Todos count: ${count}`);
+    // Find
+    // db.collection('Todos').find().count().then((count) => {
+    //     console.log(`Todos count: ${count}`);
+    //     db.close();
+    // }, (error) => {
+    //     console.log('Unable to fetch todos.', error);
+    // });
+
+    //Delete
+    // db.collection('Todos').deleteMany({text: 'Eat lunch'}).then((result) => {
+    //     console.log(result);
+    //     db.close();
+    // }, (error) => {
+    //     console.log('Unable to delete duplicate todos.', error);
+    // });
+
+    // db.collection('Todos').deleteOne({text: 'Eat lunch'}).then((result) => {
+    //     console.log(result);
+    //     db.close();
+    // }, (error) => {
+    //     console.log('Unable to delete duplicate todos.', error);
+    // });
+
+    db.collection('Todos').findOneAndDelete({completed: true}).then((result) => {
+        console.log(result);
         db.close();
     }, (error) => {
-        console.log('Unable to fetch todos.', error);
+        console.log('Unable to delete duplicate todos.', error);
     });
 
     // db.close();
